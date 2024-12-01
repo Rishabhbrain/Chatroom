@@ -1,7 +1,16 @@
 const express = require('express');
 const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const http = require('http');
+const socketIo = require('socket.io');
+
+const server = http.createServer(app);
+const io = socketIo(server, {
+    cors: {
+        origin: "https://chatroom-u3ci.onrender.com", // Replace with your actual domain
+        methods: ["GET", "POST"],
+        credentials: true
+    }
+});
 
 app.use(express.static('public'));
 
@@ -35,9 +44,12 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log('Client disconnected');
+        // Optionally remove socket from chatroom here
     });
 });
 
-server.listen("https://chatroom-u3ci.onrender.com/", () => {
-    console.log('Server listening on port 3000');
+// Use the environment variable for port assignment
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
 });
