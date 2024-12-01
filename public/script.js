@@ -1,4 +1,5 @@
 const socket = io('http://localhost:3000');
+const socket = io('https://chatroom-u3ci.onrender.com/');
 
 const usernameInput = document.getElementById('username');
 const setUsernameBtn = document.getElementById('set-username-btn');
