@@ -38,6 +38,6 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(3000, () => {
+server.listen("https://chatroom-u3ci.onrender.com/", () => {
     console.log('Server listening on port 3000');
 });
